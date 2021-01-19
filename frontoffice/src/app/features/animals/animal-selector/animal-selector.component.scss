@@ -1,0 +1,34 @@
+.section {
+  min-height: calc(100vh - 52px);
+  display: flex;
+  align-items: center;
+
+  .container {
+    .columns {
+      width: 100%;
+
+      .box {
+        padding: 0;
+        transition: 0.3s;
+
+        #dog {
+          object-fit: cover;
+          object-position: 50% 75%;
+          transform: scaleX(-1);
+          border-radius: 5px;
+        }
+
+        #cat {
+          object-fit: cover;
+          object-position: 50% 20%;
+          border-radius: 5px;
+        }
+
+        &:hover {
+          transform: translateY(-25px);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

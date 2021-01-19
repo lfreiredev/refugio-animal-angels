@@ -1,0 +1,102 @@
+<div class="section">
+  <!-- Search Section -->
+  <div class="container">
+    <div class="box">
+      <form [formGroup]="searchForm">
+        <div class="field has-addons is-grouped">
+          <div class="control has-icons-left is-expanded">
+            <input
+              class="input"
+              type="term"
+              placeholder="Termo"
+              formControlName="term"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Listing Section -->
+  <div class="container listing">
+    <div class="columns is-multiline">
+      <ng-container *ngIf="data; else loading">
+        <div class="column is-one-quarter" *ngFor="let item of data">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img
+                  [hidden]="item.photo.loaded"
+                  [src]="getPhoto(item.photo)"
+                  alt="item.alternativeText"
+                  (load)="item.photo.loaded = true"
+                />
+                <img
+                  *ngIf="!item.photo.loaded"
+                  src="/assets/dog_placeholder.png"
+                />
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="is-size-4">{{ item.name }}</p>
+
+              <div class="content">
+                <time class="is-size-7">{{ item.publishedAt }}</time>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="section container">
+    <nav
+      class="pagination is-centered"
+      role="navigation"
+      aria-label="pagination"
+    >
+      <a class="pagination-previous">Anterior</a>
+      <a class="pagination-next">Seguinte</a>
+      <ul class="pagination-list">
+        <li><a class="pagination-link">1</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link">45</a></li>
+        <li>
+          <a class="pagination-link is-current">46</a>
+        </li>
+        <li><a class="pagination-link">47</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link">86</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Loader -->
+<ng-template #loading>
+  <div class="columns is-multiline loading-col">
+    <div
+      class="column is-one-quarter"
+      *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]"
+    >
+      <div class="ph-item box">
+        <div class="ph-col-12">
+          <div class="ph-picture"></div>
+          <div class="ph-row">
+            <div class="ph-col-6 big"></div>
+            <div class="ph-col-4 empty big"></div>
+            <div class="ph-col-2 big"></div>
+            <div class="ph-col-4"></div>
+            <div class="ph-col-8 empty"></div>
+            <div class="ph-col-6"></div>
+            <div class="ph-col-6 empty"></div>
+            <div class="ph-col-12"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

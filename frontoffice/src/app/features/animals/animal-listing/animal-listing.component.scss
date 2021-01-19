@@ -1,0 +1,44 @@
+.control.has-icons-left .icon {
+  left: 14px;
+}
+
+.listing {
+  margin-top: 1.5rem;
+  min-height: 641px;
+  .card {
+    box-shadow: 0 0.2em 1em -0.125em rgba(10, 10, 10, 0.1),
+      0 0 0 1px rgba(10, 10, 10, 0.02);
+    &:hover {
+      box-shadow: 0 1em 1em -0.125em rgba(10, 10, 10, 0.1),
+        0 0 0 1px rgba(10, 10, 10, 0.02);
+      transition: 0.3s;
+
+      .card-image {
+        img {
+          transition: 0.3s;
+          transform: scale(1.2);
+          transform-origin: 50% 50%;
+        }
+      }
+    }
+
+    .card-image {
+      overflow: hidden;
+
+      img {
+        transition: 0.3s;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.loading-col {
+  width: 100%;
+  margin-top: 0.1rem;
+  margin-left: 0.1rem;
+
+  .box {
+    margin-bottom: 0;
+  }
+}
