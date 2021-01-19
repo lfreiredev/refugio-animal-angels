@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/dog_races",
+      "handler": "dog_race.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dog_races/count",
+      "handler": "dog_race.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dog_races/:id",
+      "handler": "dog_race.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/dog_races",
+      "handler": "dog_race.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/dog_races/:id",
+      "handler": "dog_race.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/dog_races/:id",
+      "handler": "dog_race.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

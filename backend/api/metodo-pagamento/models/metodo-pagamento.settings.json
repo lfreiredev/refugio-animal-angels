@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "metodo_pagamentos",
+  "info": {
+    "name": "Métodos Pagamento",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "mbway",
+        "nib",
+        "iban",
+        "bic_swift"
+      ]
+    }
+  }
+}

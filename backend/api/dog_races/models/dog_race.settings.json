@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dog_race",
+  "info": {
+    "name": "Raças Cães",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "conditions",
+  "info": {
+    "name": "Condições",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "description": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}
