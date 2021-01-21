@@ -52,24 +52,33 @@
     </div>
   </div>
   <!-- Pagination -->
-  <div class="section container">
+  <div class="section container page">
     <nav
       class="pagination is-centered"
       role="navigation"
       aria-label="pagination"
     >
-      <a class="pagination-previous">Anterior</a>
-      <a class="pagination-next">Seguinte</a>
+      <a
+        class="pagination-previous"
+        [ngClass]="{ disabled: pageNumber == 0 }"
+        (click)="navigateToPrevious()"
+        >Anterior</a
+      >
+      <a
+        class="pagination-next"
+        [ngClass]="{ disabled: pageNumber == totalPages - 1 }"
+        (click)="navigateToNext()"
+        >Seguinte</a
+      >
       <ul class="pagination-list">
-        <li><a class="pagination-link">1</a></li>
-        <li><span class="pagination-ellipsis">&hellip;</span></li>
-        <li><a class="pagination-link">45</a></li>
-        <li>
-          <a class="pagination-link is-current">46</a>
+        <li *ngFor="let page of pages; let i = index">
+          <a
+            class="pagination-link"
+            [ngClass]="{ 'is-current': pageNumber == i }"
+            (click)="navigateTo(i)"
+            >{{ page }}</a
+          >
         </li>
-        <li><a class="pagination-link">47</a></li>
-        <li><span class="pagination-ellipsis">&hellip;</span></li>
-        <li><a class="pagination-link">86</a></li>
       </ul>
     </nav>
   </div>

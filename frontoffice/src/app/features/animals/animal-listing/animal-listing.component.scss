@@ -1,10 +1,6 @@
-.control.has-icons-left .icon {
-  left: 14px;
-}
-
 .listing {
   margin-top: 1.5rem;
-  min-height: 641px;
+  min-height: calc(100vh - 344px);
   .card {
     box-shadow: 0 0.2em 1em -0.125em rgba(10, 10, 10, 0.1),
       0 0 0 1px rgba(10, 10, 10, 0.02);
@@ -41,4 +37,13 @@
   .box {
     margin-bottom: 0;
   }
+}
+
+a.disabled {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.page {
+  padding-bottom: 0;
 }
