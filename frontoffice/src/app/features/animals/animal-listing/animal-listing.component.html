@@ -1,23 +1,7 @@
 <div class="section">
   <!-- Search Section -->
   <div class="container">
-    <div class="box">
-      <form [formGroup]="searchForm">
-        <div class="field has-addons is-grouped">
-          <div class="control has-icons-left is-expanded">
-            <input
-              class="input"
-              type="term"
-              placeholder="Termo"
-              formControlName="term"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-search"></i>
-            </span>
-          </div>
-        </div>
-      </form>
-    </div>
+    <app-search [searchForm]="searchForm"></app-search>
   </div>
   <!-- Listing Section -->
   <div class="container listing">
@@ -52,60 +36,15 @@
     </div>
   </div>
   <!-- Pagination -->
-  <div class="section container page">
-    <nav
-      class="pagination is-centered"
-      role="navigation"
-      aria-label="pagination"
-    >
-      <a
-        class="pagination-previous"
-        [ngClass]="{ disabled: pageNumber == 0 }"
-        (click)="navigateToPrevious()"
-        >Anterior</a
-      >
-      <a
-        class="pagination-next"
-        [ngClass]="{ disabled: pageNumber == totalPages - 1 }"
-        (click)="navigateToNext()"
-        >Seguinte</a
-      >
-      <ul class="pagination-list">
-        <li *ngFor="let page of pages; let i = index">
-          <a
-            class="pagination-link"
-            [ngClass]="{ 'is-current': pageNumber == i }"
-            (click)="navigateTo(i)"
-            >{{ page }}</a
-          >
-        </li>
-      </ul>
-    </nav>
-  </div>
+  <app-pagination
+    [pageNumber]="pageNumber"
+    [pageSize]="pageSize"
+    [_dataSize]="dataSize"
+    (pageNumberChanged)="onPageNumberChanged($event)"
+  ></app-pagination>
 </div>
 
 <!-- Loader -->
 <ng-template #loading>
-  <div class="columns is-multiline loading-col">
-    <div
-      class="column is-one-quarter"
-      *ngFor="let x of [0, 1, 2, 3, 4, 5, 6, 7]"
-    >
-      <div class="ph-item box">
-        <div class="ph-col-12">
-          <div class="ph-picture"></div>
-          <div class="ph-row">
-            <div class="ph-col-6 big"></div>
-            <div class="ph-col-4 empty big"></div>
-            <div class="ph-col-2 big"></div>
-            <div class="ph-col-4"></div>
-            <div class="ph-col-8 empty"></div>
-            <div class="ph-col-6"></div>
-            <div class="ph-col-6 empty"></div>
-            <div class="ph-col-12"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-animal-card-placeholder></app-animal-card-placeholder>
 </ng-template>

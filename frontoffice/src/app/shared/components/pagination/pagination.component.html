@@ -1,0 +1,26 @@
+<div class="section container page">
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <a
+      class="pagination-previous"
+      [ngClass]="{ disabled: pageNumber == 0 }"
+      (click)="navigateToPrevious()"
+      >Anterior</a
+    >
+    <a
+      class="pagination-next"
+      [ngClass]="{ disabled: pageNumber == dataSize - 1 }"
+      (click)="navigateToNext()"
+      >Seguinte</a
+    >
+    <ul class="pagination-list">
+      <li *ngFor="let page of pages; let i = index">
+        <a
+          class="pagination-link"
+          [ngClass]="{ 'is-current': pageNumber == i }"
+          (click)="navigateTo(i)"
+          >{{ page }}</a
+        >
+      </li>
+    </ul>
+  </nav>
+</div>

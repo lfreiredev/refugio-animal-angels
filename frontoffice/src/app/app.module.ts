@@ -7,6 +7,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {} from './shared/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],

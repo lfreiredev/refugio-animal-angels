@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { iif, of } from 'rxjs';
+import { iif, of, Subscription } from 'rxjs';
 import {
   debounceTime,
   delay,
@@ -20,16 +20,15 @@ import { PaginatedResponse } from 'src/app/core/models/paginated-response.model'
   templateUrl: './animal-listing.component.html',
   styleUrls: ['./animal-listing.component.scss'],
 })
-export class AnimalListingComponent implements OnInit {
+export class AnimalListingComponent implements OnInit, OnDestroy {
   searchForm: FormGroup = new FormGroup({});
   data: BaseAnimal[];
-  loadingData: boolean = false;
-
-  // extract to service
   pageSize: number = 1;
   pageNumber: number = 0;
-  totalPages: number = 0;
-  pages: number[] = [];
+  dataSize: number = 0;
+
+  termChangesObs$: Subscription;
+  pageChangedSearchObs$: Subscription;
 
   constructor(
     private dogService: DogService,
@@ -37,9 +36,55 @@ export class AnimalListingComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.setForm();
+    this.initObservables();
+  }
 
+  ngOnDestroy() {
+    this.termChangesObs$.unsubscribe();
+    this.pageChangedSearchObs$.unsubscribe();
+  }
+
+  onPageNumberChanged(pageNumber: number) {
+    if (this.pageNumber == pageNumber) return;
+    this.pageNumber = pageNumber;
+    this.search();
+  }
+
+  getPhoto(photo: Photo) {
+    return this.photoService.getSmall(photo.formats);
+  }
+
+  private resetSearch() {
+    this.pageNumber = 0;
+  }
+
+  private search() {
+    this.pageChangedSearchObs$ = this.dogService
+      .search(
+        this.searchForm.controls.term.value,
+        this.pageSize,
+        this.pageNumber * this.pageSize
+      )
+      .pipe(delay(300))
+      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
+        this.processResponse(res)
+      );
+  }
+
+  private processResponse(res: PaginatedResponse<BaseAnimal>) {
+    this.data = res.entities;
+    this.dataSize = res.count;
+  }
+
+  private setForm() {
+    this.searchForm = new FormGroup({
+      term: new FormControl(''),
+    });
+  }
+
+  private initObservables() {
     this.route.paramMap
       .pipe(
         take(1),
@@ -61,17 +106,14 @@ export class AnimalListingComponent implements OnInit {
         this.processResponse(res)
       );
 
-    this.searchForm.controls.term.valueChanges
+    this.termChangesObs$ = this.searchForm.controls.term.valueChanges
       .pipe(
         debounceTime(500),
         switchMap(() => {
-          this.pageNumber = 0;
-          this.totalPages = 0;
+          this.resetSearch();
           return this.dogService.search(
             this.searchForm.controls.term.value,
-            this.totalPages != 0
-              ? Math.floor(this.totalPages / this.pageSize)
-              : this.pageSize,
+            this.pageSize,
             this.pageNumber * this.pageSize
           );
         }),
@@ -80,51 +122,5 @@ export class AnimalListingComponent implements OnInit {
       .subscribe((res: PaginatedResponse<BaseAnimal>) =>
         this.processResponse(res)
       );
-  }
-
-  private processResponse(res: PaginatedResponse<BaseAnimal>) {
-    this.data = res.entities;
-    this.totalPages = res.count;
-    this.pages = [];
-    if (Math.floor(this.totalPages / this.pageSize) == 0) {
-      this.pages.push(1);
-    } else {
-      for (let i = 0; i < Math.floor(this.totalPages / this.pageSize); i++) {
-        this.pages.push(i + 1);
-      }
-    }
-  }
-
-  navigateTo(index: number) {
-    this.pageNumber = index;
-    this.dogService
-      .search(
-        this.searchForm.controls.term.value,
-        this.pageSize,
-        this.pageNumber * this.pageSize
-      )
-      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
-        this.processResponse(res)
-      );
-  }
-
-  navigateToPrevious() {
-    if (this.pageNumber == 0) return;
-    this.navigateTo(--this.pageNumber);
-  }
-
-  navigateToNext() {
-    if (this.pageNumber == this.totalPages - 1) return;
-    this.navigateTo(++this.pageNumber);
-  }
-
-  getPhoto(photo: Photo) {
-    return this.photoService.getSmall(photo.formats);
-  }
-
-  private setForm() {
-    this.searchForm = new FormGroup({
-      term: new FormControl(''),
-    });
   }
 }
