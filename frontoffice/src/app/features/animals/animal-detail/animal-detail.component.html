@@ -1,0 +1,58 @@
+<div class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-two-thirds">
+        <div class="columns">
+          <div class="column">
+            <figure class="image is-4by3">
+              <img
+                [hidden]="animal.photo.loaded"
+                [src]="getPhoto(animal.photo)"
+                alt="item.alternativeText"
+                (load)="animal.photo.loaded = true"
+              />
+              <img
+                *ngIf="!animal.photo.loaded"
+                src="/assets/dog_placeholder.png"
+              />
+            </figure>
+          </div>
+          <div class="column">
+            <h3 class="is-size-5 has-text-weight-bold">Nome</h3>
+            <p>{{ animal.name }}</p>
+            <h3 class="is-size-5 has-text-weight-bold">Sexo</h3>
+            <p>{{ animal.sex }}</p>
+            <h3 class="is-size-5 has-text-weight-bold">Idade</h3>
+            <p>{{ animal.age }}</p>
+            <h3 class="is-size-5 has-text-weight-bold">Porte</h3>
+            <p>{{ animal.size }}</p>
+            <h3 class="is-size-5 has-text-weight-bold">Raça</h3>
+            <p>{{ animal.race.name }}</p>
+          </div>
+        </div>
+        <h3 class="is-size-5 has-text-weight-bold">Condições</h3>
+        <div class="conditions-container">
+          <span class="tag" *ngFor="let condition of animal.conditions">{{
+            condition.description
+          }}</span>
+        </div>
+        <h3 class="is-size-5 has-text-weight-bold">Contactos</h3>
+        <div class="contacts-container">
+          <span class="tag" *ngFor="let contact of animal.contacts">{{
+            contact.description
+          }}</span>
+        </div>
+        <p>
+          {{ animal.description }}
+          {{ animal.description }}
+          {{ animal.description }}
+        </p>
+      </div>
+      <div class="column last-posted">
+        <div id="dummy">
+          <app-animal-animal-last-posted></app-animal-animal-last-posted>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,9 +5,16 @@ import { AnimalListingComponent } from './animal-listing/animal-listing.componen
 import { AnimalsRoutingModule } from './animals-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AnimalDetailComponent } from './animal-detail/animal-detail.component';
+import { AnimalLastPostedComponent } from './animal-last-posted/animal-last-posted.component';
 
 @NgModule({
-  declarations: [AnimalSelectorComponent, AnimalListingComponent],
+  declarations: [
+    AnimalSelectorComponent,
+    AnimalListingComponent,
+    AnimalDetailComponent,
+    AnimalLastPostedComponent,
+  ],
   imports: [
     CommonModule,
     AnimalsRoutingModule,

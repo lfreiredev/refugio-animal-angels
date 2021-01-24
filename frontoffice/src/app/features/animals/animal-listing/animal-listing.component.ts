@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { iif, of, Subscription } from 'rxjs';
 import {
   debounceTime,
@@ -33,7 +33,8 @@ export class AnimalListingComponent implements OnInit, OnDestroy {
   constructor(
     private dogService: DogService,
     private photoService: PhotoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -43,7 +44,9 @@ export class AnimalListingComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.termChangesObs$.unsubscribe();
-    this.pageChangedSearchObs$.unsubscribe();
+    if (this.pageChangedSearchObs$) {
+      this.pageChangedSearchObs$.unsubscribe();
+    }
   }
 
   onPageNumberChanged(pageNumber: number) {
@@ -54,6 +57,11 @@ export class AnimalListingComponent implements OnInit, OnDestroy {
 
   getPhoto(photo: Photo) {
     return this.photoService.getSmall(photo.formats);
+  }
+
+  navigateToDetail(item: BaseAnimal) {
+    this.dogService.currAnimal = item;
+    this.router.navigate(['animais/' + item.id]);
   }
 
   private resetSearch() {

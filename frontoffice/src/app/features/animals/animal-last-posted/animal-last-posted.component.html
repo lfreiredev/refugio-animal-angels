@@ -1,0 +1,34 @@
+<!-- Listing Section -->
+<div class="container listing">
+  <p class="is-size-3">Últimas Atualizações</p>
+  <br />
+  <div class="columns is-multiline" *ngIf="data; else loading">
+    <div class="item column is-half" *ngFor="let item of data">
+      <div class="card" (click)="navigateToDetail(item)">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img
+              [hidden]="item.photo.loaded"
+              [src]="getPhoto(item.photo)"
+              alt="item.alternativeText"
+              (load)="item.photo.loaded = true"
+            />
+            <img *ngIf="!item.photo.loaded" src="/assets/dog_placeholder.png" />
+          </figure>
+        </div>
+        <div class="card-content">
+          <p class="is-size-4">{{ item.name }}</p>
+
+          <div class="content">
+            <time class="is-size-7">{{ item.publishedAt }}</time>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loader -->
+<ng-template #loading>
+  <app-animal-card-placeholder></app-animal-card-placeholder>
+</ng-template>
