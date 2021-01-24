@@ -9,6 +9,7 @@ import { PaginatedResponse } from '../models/paginated-response.model';
 })
 export class DogService {
   private readonly url = 'http://localhost:1337/dog/';
+  private readonly lastPostedSize = 6;
 
   // TODO change this to state
   currAnimal: BaseAnimal;
@@ -27,7 +28,7 @@ export class DogService {
 
   getLastPosted(): Observable<PaginatedResponse<BaseAnimal>> {
     return this.httpClient.get<PaginatedResponse<BaseAnimal>>(
-      this.url + `?_limit=${4}&_sort=updatedAt`
+      this.url + `?_limit=${this.lastPostedSize}&_sort=updatedAt`
     );
   }
 

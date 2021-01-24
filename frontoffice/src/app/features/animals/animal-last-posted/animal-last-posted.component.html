@@ -1,6 +1,6 @@
 <!-- Listing Section -->
 <div class="container listing">
-  <p class="is-size-3">Últimas Atualizações</p>
+  <p class="is-size-4">Últimas Atualizações</p>
   <br />
   <div class="columns is-multiline" *ngIf="data; else loading">
     <div class="item column is-half" *ngFor="let item of data">
@@ -17,7 +17,7 @@
           </figure>
         </div>
         <div class="card-content">
-          <p class="is-size-4">{{ item.name }}</p>
+          <p>{{ item.name }}</p>
 
           <div class="content">
             <time class="is-size-7">{{ item.publishedAt }}</time>

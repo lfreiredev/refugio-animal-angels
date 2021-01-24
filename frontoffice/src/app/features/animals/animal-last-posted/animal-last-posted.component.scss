@@ -1,6 +1,6 @@
 .listing {
   .item {
-    padding: 0 25px;
+    padding: 0 15px;
     margin-bottom: 1.5rem;
     &:last-child {
       margin-bottom: 0;
@@ -9,6 +9,10 @@
   .card {
     box-shadow: 0 0.2em 1em -0.125em rgba(10, 10, 10, 0.1),
       0 0 0 1px rgba(10, 10, 10, 0.02);
+
+    .card-content {
+      padding: 0.5rem;
+    }
     &:hover {
       box-shadow: 0 1em 1em -0.125em rgba(10, 10, 10, 0.1),
         0 0 0 1px rgba(10, 10, 10, 0.02);

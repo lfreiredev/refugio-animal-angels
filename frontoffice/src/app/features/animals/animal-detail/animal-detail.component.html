@@ -1,5 +1,5 @@
 <div class="section">
-  <div class="container">
+  <div class="container is-max-desktop">
     <div class="columns">
       <div class="column is-two-thirds">
         <div class="columns">
@@ -19,34 +19,43 @@
           </div>
           <div class="column">
             <h3 class="is-size-5 has-text-weight-bold">Nome</h3>
-            <p>{{ animal.name }}</p>
+            <p>{{ animal.name | titlecase }}</p>
             <h3 class="is-size-5 has-text-weight-bold">Sexo</h3>
-            <p>{{ animal.sex }}</p>
+            <p>{{ animal.sex | titlecase }}</p>
             <h3 class="is-size-5 has-text-weight-bold">Idade</h3>
             <p>{{ animal.age }}</p>
             <h3 class="is-size-5 has-text-weight-bold">Porte</h3>
-            <p>{{ animal.size }}</p>
+            <p>{{ animal.size | titlecase }}</p>
             <h3 class="is-size-5 has-text-weight-bold">Raça</h3>
-            <p>{{ animal.race.name }}</p>
+            <p>{{ animal.race.name | titlecase }}</p>
           </div>
         </div>
-        <h3 class="is-size-5 has-text-weight-bold">Condições</h3>
-        <div class="conditions-container">
-          <span class="tag" *ngFor="let condition of animal.conditions">{{
-            condition.description
-          }}</span>
+        <div class="block">
+          <h3 class="is-size-5 has-text-weight-bold">Condições</h3>
+          <div class="conditions-container mt-2">
+            <span
+              class="tag is-info mx-1"
+              *ngFor="let condition of animal.conditions"
+              >{{ condition.description }}</span
+            >
+          </div>
         </div>
-        <h3 class="is-size-5 has-text-weight-bold">Contactos</h3>
-        <div class="contacts-container">
-          <span class="tag" *ngFor="let contact of animal.contacts">{{
-            contact.description
-          }}</span>
+        <div class="block">
+          <h3 class="is-size-5 has-text-weight-bold">Contactos</h3>
+          <div class="contacts-container mt-2">
+            <span
+              class="tag is-info mx-1"
+              *ngFor="let contact of animal.contacts"
+              >{{ contact.description }}</span
+            >
+          </div>
         </div>
-        <p>
-          {{ animal.description }}
-          {{ animal.description }}
-          {{ animal.description }}
-        </p>
+        <div class="block">
+          <h3 class="is-size-5 has-text-weight-bold">Descrição</h3>
+          <p class="mt-2">
+            {{ animal.description }}
+          </p>
+        </div>
       </div>
       <div class="column last-posted">
         <div id="dummy">

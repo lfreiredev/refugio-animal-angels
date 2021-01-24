@@ -1,4 +1,5 @@
 .wrapper {
   width: 100%;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - 68px - 168px); // - navbar - footer
+  background-color: #fafafa;
 }
