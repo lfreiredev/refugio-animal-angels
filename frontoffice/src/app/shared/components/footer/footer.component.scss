@@ -1,3 +1,19 @@
 footer {
+  min-height: 150px;
   background-color: white;
+  padding: 3rem 1.5rem 3rem;
+
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+
+  .icon {
+    margin: 10px;
+
+    svg {
+      height: 25px;
+      width: 25px;
+    }
+  }
 }
