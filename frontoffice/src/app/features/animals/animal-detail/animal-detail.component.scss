@@ -1,8 +1,15 @@
-#dummy {
-  border-left: 1px black solid;
+#wrapper {
   padding-left: 25px;
 }
 
 img {
   object-fit: cover;
+}
+
+.detail {
+  padding: 1.5rem;
+}
+
+.contacts-container .tag:hover {
+  cursor: pointer;
 }

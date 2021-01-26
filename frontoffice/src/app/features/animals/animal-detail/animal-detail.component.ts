@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
 import { BaseAnimal } from 'src/app/core/models/base-animal.model';
+import { Contact } from 'src/app/core/models/contact.model';
 import { Photo } from 'src/app/core/models/photo.model';
 import { DogService } from 'src/app/core/services/dog.service';
 import { PhotoService } from 'src/app/core/services/photo.service';
@@ -21,18 +22,31 @@ export class AnimalDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.animal = this.dogService.currAnimal;
     if (!this.animal) {
       this.route.paramMap
-        .pipe(
-          take(1),
-          switchMap((params) => this.dogService.getById(params.get('id')))
-        )
+        .pipe(switchMap((params) => this.dogService.getById(params.get('id'))))
         .subscribe((animal) => (this.animal = animal));
     }
   }
 
   getPhoto(photo: Photo) {
     return this.photoService.getSmall(photo.formats);
+  }
+
+  onContactClicked(contact: Contact) {
+    switch (contact.type) {
+      case 'telemovel': {
+        window.location.href = `tel:${contact.description}`;
+        break;
+      }
+      case 'email': {
+        window.location.href = `mailto:${contact.description}`;
+        break;
+      }
+      case 'rede_social': {
+        window.open('https://www.facebook.com/refugioanimalangels', 'blank');
+        break;
+      }
+    }
   }
 }

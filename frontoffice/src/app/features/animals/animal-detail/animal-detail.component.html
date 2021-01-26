@@ -1,64 +1,70 @@
 <div class="section">
   <div class="container is-max-desktop">
     <div class="columns">
-      <div class="column is-two-thirds">
-        <div class="columns">
-          <div class="column">
-            <figure class="image is-4by3">
-              <img
-                [hidden]="animal.photo.loaded"
-                [src]="getPhoto(animal.photo)"
-                alt="item.alternativeText"
-                (load)="animal.photo.loaded = true"
-              />
-              <img
-                *ngIf="!animal.photo.loaded"
-                src="/assets/dog_placeholder.png"
-              />
-            </figure>
+      <div class="column is-two-thirds box detail">
+        <app-animal-detail-placeholder
+          *ngIf="!animal"
+        ></app-animal-detail-placeholder>
+        <ng-container *ngIf="animal">
+          <div class="columns">
+            <div class="column">
+              <figure class="image is-4by3">
+                <img
+                  [hidden]="animal.photo.loaded"
+                  [src]="getPhoto(animal.photo)"
+                  alt="item.alternativeText"
+                  (load)="animal.photo.loaded = true"
+                />
+                <img
+                  *ngIf="!animal.photo.loaded"
+                  src="/assets/dog_placeholder.png"
+                />
+              </figure>
+            </div>
+            <div class="column">
+              <h3 class="is-size-5 has-text-weight-bold">Nome</h3>
+              <p>{{ animal.name | titlecase }}</p>
+              <h3 class="is-size-5 has-text-weight-bold">Sexo</h3>
+              <p>{{ animal.sex | titlecase }}</p>
+              <h3 class="is-size-5 has-text-weight-bold">Idade</h3>
+              <p>{{ animal.age }}</p>
+              <h3 class="is-size-5 has-text-weight-bold">Porte</h3>
+              <p>{{ animal.size | titlecase }}</p>
+              <h3 class="is-size-5 has-text-weight-bold">Raça</h3>
+              <p>{{ animal.race.name | titlecase }}</p>
+            </div>
           </div>
-          <div class="column">
-            <h3 class="is-size-5 has-text-weight-bold">Nome</h3>
-            <p>{{ animal.name | titlecase }}</p>
-            <h3 class="is-size-5 has-text-weight-bold">Sexo</h3>
-            <p>{{ animal.sex | titlecase }}</p>
-            <h3 class="is-size-5 has-text-weight-bold">Idade</h3>
-            <p>{{ animal.age }}</p>
-            <h3 class="is-size-5 has-text-weight-bold">Porte</h3>
-            <p>{{ animal.size | titlecase }}</p>
-            <h3 class="is-size-5 has-text-weight-bold">Raça</h3>
-            <p>{{ animal.race.name | titlecase }}</p>
+          <div class="block">
+            <h3 class="is-size-5 has-text-weight-bold">Condições</h3>
+            <div class="conditions-container mt-2">
+              <span
+                class="tag is-info mx-1"
+                *ngFor="let condition of animal.conditions"
+                >{{ condition.description }}</span
+              >
+            </div>
           </div>
-        </div>
-        <div class="block">
-          <h3 class="is-size-5 has-text-weight-bold">Condições</h3>
-          <div class="conditions-container mt-2">
-            <span
-              class="tag is-info mx-1"
-              *ngFor="let condition of animal.conditions"
-              >{{ condition.description }}</span
-            >
+          <div class="block">
+            <h3 class="is-size-5 has-text-weight-bold">Contactos</h3>
+            <div class="contacts-container mt-2">
+              <span
+                class="tag is-info mx-1"
+                *ngFor="let contact of animal.contacts"
+                (click)="onContactClicked(contact)"
+                >{{ contact.description }}</span
+              >
+            </div>
           </div>
-        </div>
-        <div class="block">
-          <h3 class="is-size-5 has-text-weight-bold">Contactos</h3>
-          <div class="contacts-container mt-2">
-            <span
-              class="tag is-info mx-1"
-              *ngFor="let contact of animal.contacts"
-              >{{ contact.description }}</span
-            >
+          <div class="block">
+            <h3 class="is-size-5 has-text-weight-bold">Descrição</h3>
+            <p class="mt-2">
+              {{ animal.description }}
+            </p>
           </div>
-        </div>
-        <div class="block">
-          <h3 class="is-size-5 has-text-weight-bold">Descrição</h3>
-          <p class="mt-2">
-            {{ animal.description }}
-          </p>
-        </div>
+        </ng-container>
       </div>
       <div class="column last-posted">
-        <div id="dummy">
+        <div id="wrapper">
           <app-animal-animal-last-posted></app-animal-animal-last-posted>
         </div>
       </div>
