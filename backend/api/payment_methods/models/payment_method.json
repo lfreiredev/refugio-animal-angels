@@ -1,6 +1,6 @@
 {
   "kind": "collectionType",
-  "collectionName": "metodo_pagamentos",
+  "collectionName": "payment_methods",
   "info": {
     "name": "Métodos Pagamento",
     "description": ""
@@ -17,12 +17,7 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "mbway",
-        "nib",
-        "iban",
-        "bic_swift"
-      ]
+      "enum": ["mbway", "nib", "iban", "bic_swift"]
     }
   }
 }
