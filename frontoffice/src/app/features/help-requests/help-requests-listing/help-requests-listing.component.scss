@@ -1,6 +1,11 @@
 .listing {
   margin-top: 1.5rem;
   min-height: calc(100vh - 344px);
+
+  .tags:hover {
+    cursor: pointer;
+  }
+
   .card {
     box-shadow: 0 0.2em 1em -0.125em rgba(10, 10, 10, 0.1),
       0 0 0 1px rgba(10, 10, 10, 0.02);

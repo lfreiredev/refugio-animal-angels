@@ -1,34 +1,90 @@
 <div class="section">
   <!-- Listing Section -->
   <div class="container listing">
-    <div class="columns is-multiline">
-      <ng-container *ngIf="data; else loading">
-        <div class="column is-one-quarter" *ngFor="let item of data">
-          <div class="card" (click)="navigateToDetail(item)">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img
-                  [hidden]="item.photo.loaded"
-                  [src]="getPhoto(item.photo)"
-                  alt="item.alternativeText"
-                  (load)="item.photo.loaded = true"
-                />
-                <img
-                  *ngIf="!item.photo.loaded"
-                  src="/assets/dog_placeholder.png"
-                />
-              </figure>
-            </div>
-            <div class="card-content">
-              <p class="is-size-4">{{ item.name }}</p>
+    <div class="columns">
+      <div class="column is-two-fifths">
+        <p class="is-size-3">Como ajudar?</p>
+        <div *ngFor="let paymentMethod of paymentMethods">
+          <div class="block"></div>
+          <ng-container [ngSwitch]="paymentMethod.type">
+            <ng-container *ngSwitchCase="'nib'">
+              <div class="field is-grouped is-grouped-multiline my-2">
+                <div class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-dark is-medium"
+                      ><span class="icon">
+                        <i class="fas fa-money-check"></i></span
+                    ></span>
+                    <span class="tag is-info is-medium">
+                      {{ paymentMethod.description }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'iban'">
+              <div class="field is-grouped is-grouped-multiline my-2">
+                <div class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-dark is-medium"
+                      ><span class="icon">
+                        <i class="fas fa-money-check"></i></span
+                    ></span>
+                    <span class="tag is-info is-medium">
+                      {{ paymentMethod.description }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'mbway'">
+              <div class="field is-grouped is-grouped-multiline my-2">
+                <div class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-dark is-medium"
+                      ><span class="icon"> <i class="fas fa-phone"></i></span
+                    ></span>
+                    <span class="tag is-info is-medium">
+                      {{ paymentMethod.description }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+      <div class="column">
+        <div class="columns is-multiline">
+          <ng-container *ngIf="data; else loading">
+            <div class="column is-one-quarter" *ngFor="let item of data">
+              <div class="card" (click)="navigateToDetail(item)">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img
+                      [hidden]="item.image.loaded"
+                      [src]="getPhoto(item.image)"
+                      alt="item.alternativeText"
+                      (load)="item.image.loaded = true"
+                    />
+                    <img
+                      *ngIf="!item.image.loaded"
+                      src="/assets/dog_placeholder.png"
+                    />
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <p class="is-size-4">{{ item.name }}</p>
 
-              <div class="content">
-                <time class="is-size-7">{{ item.publishedAt }}</time>
+                  <div class="content">
+                    <time class="is-size-7">{{ item.publishedAt }}</time>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </div>
-      </ng-container>
+      </div>
     </div>
   </div>
   <!-- Pagination -->

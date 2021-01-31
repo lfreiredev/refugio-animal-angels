@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "help-requests",
+  "info": {
+    "name": "Pedidos Ajuda"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": ["images"],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

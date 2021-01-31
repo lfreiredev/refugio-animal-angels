@@ -1,19 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { iif, of, Subscription } from 'rxjs';
-import {
-  debounceTime,
-  delay,
-  shareReplay,
-  switchMap,
-  take,
-} from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { Photo } from 'src/app/core/models/photo.model';
-import { BaseAnimal } from 'src/app/core/models/base-animal.model';
-import { DogService } from '../../../core/services/dog.service';
 import { PhotoService } from '../../../core/services/photo.service';
 import { PaginatedResponse } from 'src/app/core/models/paginated-response.model';
+import { HelpRequest } from 'src/app/core/models/help-request.model';
+import { HelpRequestService } from 'src/app/core/services/help-request.service';
+import { PaymentMethod } from 'src/app/core/models/payment-method.model';
+import { PaymentMethodService } from 'src/app/core/services/payment-method.service';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-help-requests-listing',
@@ -21,19 +17,20 @@ import { PaginatedResponse } from 'src/app/core/models/paginated-response.model'
   styleUrls: ['./help-requests-listing.component.scss'],
 })
 export class HelpRequestsListingComponent implements OnInit, OnDestroy {
-  data: BaseAnimal[];
+  data: HelpRequest[];
+  paymentMethods: PaymentMethod[];
   pageSize: number = 1;
   pageNumber: number = 0;
   dataSize: number = 0;
 
-  termChangesObs$: Subscription;
+  showCopiedInfo = false;
+
   pageChangedSearchObs$: Subscription;
 
   constructor(
-    private dogService: DogService,
-    private photoService: PhotoService,
-    private route: ActivatedRoute,
-    private router: Router
+    private helpRequestService: HelpRequestService,
+    private paymentMethodService: PaymentMethodService,
+    private photoService: PhotoService
   ) {}
 
   ngOnInit() {
@@ -41,7 +38,6 @@ export class HelpRequestsListingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.termChangesObs$.unsubscribe();
     if (this.pageChangedSearchObs$) {
       this.pageChangedSearchObs$.unsubscribe();
     }
@@ -57,53 +53,34 @@ export class HelpRequestsListingComponent implements OnInit, OnDestroy {
     return this.photoService.getSmall(photo.formats);
   }
 
-  navigateToDetail(item: BaseAnimal) {
-    this.dogService.currAnimal = item;
-    this.router.navigate(['animais/' + item.id]);
-  }
-
-  private resetSearch() {
-    this.pageNumber = 0;
+  navigateToDetail() {
+    // this.dogService.currAnimal = item;
+    // this.router.navigate(['pedido-ajuda/' + item.id]);
   }
 
   private search() {
-    this.pageChangedSearchObs$ = this.dogService
-      .search(
-        this.searchForm.controls.term.value,
-        this.pageSize,
-        this.pageNumber * this.pageSize
-      )
+    this.pageChangedSearchObs$ = this.helpRequestService
+      .get(this.pageSize, this.pageNumber * this.pageSize)
       .pipe(delay(300))
-      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
+      .subscribe((res: PaginatedResponse<HelpRequest>) =>
         this.processResponse(res)
       );
   }
 
-  private processResponse(res: PaginatedResponse<BaseAnimal>) {
+  private processResponse(res: PaginatedResponse<HelpRequest>) {
     this.data = res.entities;
     this.dataSize = res.count;
   }
 
   private initObservables() {
-    this.route.paramMap
-      .pipe(
-        take(1),
-        switchMap((params) => {
-          return iif(
-            () => params.get('type') == 'cao',
-            this.dogService.search(
-              this.searchForm.controls.term.value,
-              this.pageSize,
-              this.pageNumber * this.pageSize
-            ),
-            of(undefined)
-          );
-        }),
-        delay(300),
-        shareReplay(1)
-      )
-      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
+    this.helpRequestService
+      .get(this.pageSize, this.pageNumber * this.pageSize)
+      .subscribe((res: PaginatedResponse<HelpRequest>) =>
         this.processResponse(res)
       );
+
+    this.paymentMethodService.getAll().subscribe((paymentMethods) => {
+      this.paymentMethods = paymentMethods;
+    });
   }
 }
