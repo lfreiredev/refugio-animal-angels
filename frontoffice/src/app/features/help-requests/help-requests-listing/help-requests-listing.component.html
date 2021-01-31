@@ -11,6 +11,7 @@
               <div class="field is-grouped is-grouped-multiline my-2">
                 <div class="control">
                   <div class="tags has-addons">
+                    <span class="text">NIB</span>
                     <span class="tag is-dark is-medium"
                       ><span class="icon">
                         <i class="fas fa-money-check"></i></span
@@ -26,6 +27,7 @@
               <div class="field is-grouped is-grouped-multiline my-2">
                 <div class="control">
                   <div class="tags has-addons">
+                    <span class="text">IBAN</span>
                     <span class="tag is-dark is-medium"
                       ><span class="icon">
                         <i class="fas fa-money-check"></i></span
@@ -41,6 +43,7 @@
               <div class="field is-grouped is-grouped-multiline my-2">
                 <div class="control">
                   <div class="tags has-addons">
+                    <span class="text">MBWAY</span>
                     <span class="tag is-dark is-medium"
                       ><span class="icon"> <i class="fas fa-phone"></i></span
                     ></span>
@@ -55,45 +58,49 @@
         </div>
       </div>
       <div class="column">
-        <div class="columns is-multiline">
-          <ng-container *ngIf="data; else loading">
-            <div class="column is-one-quarter" *ngFor="let item of data">
-              <div class="card" (click)="navigateToDetail(item)">
-                <div class="card-image">
-                  <figure class="image is-4by3">
+        <p class="is-size-3">Pedidos de Ajuda</p>
+        <div class="block"></div>
+        <ng-container *ngIf="data; else loading">
+          <div *ngFor="let item of data">
+            <!-- is-hidden -->
+            <div class="card is-fullwidth mb-4">
+              <header class="card-header">
+                <p class="card-header-title">{{ item.title }}</p>
+                <a
+                  class="card-header-icon card-toggle"
+                  [ngClass]="{ rotated: item.isOpen }"
+                  (click)="changeOpenedState(item)"
+                >
+                  <i class="fa fa-angle-down"></i>
+                </a>
+              </header>
+              <div
+                class="card-content"
+                [ngClass]="{ 'is-hidden': !item.isOpen }"
+              >
+                <div *ngIf="item.image" class="card-media pr-4">
+                  <figure class="image">
                     <img
-                      [hidden]="item.image.loaded"
                       [src]="getPhoto(item.image)"
-                      alt="item.alternativeText"
-                      (load)="item.image.loaded = true"
-                    />
-                    <img
-                      *ngIf="!item.image.loaded"
-                      src="/assets/dog_placeholder.png"
+                      alt="item.image.alternativeText"
                     />
                   </figure>
                 </div>
-                <div class="card-content">
-                  <p class="is-size-4">{{ item.name }}</p>
-
-                  <div class="content">
-                    <time class="is-size-7">{{ item.publishedAt }}</time>
-                  </div>
-                </div>
+                <div class="content">{{ item.description }}</div>
               </div>
             </div>
-          </ng-container>
-        </div>
+          </div>
+        </ng-container>
+        <!-- Pagination -->
+        <app-pagination
+          [pageNumber]="pageNumber"
+          [pageSize]="pageSize"
+          [_dataSize]="dataSize"
+          (pageNumberChanged)="onPageNumberChanged($event)"
+        ></app-pagination>
       </div>
     </div>
   </div>
-  <!-- Pagination -->
-  <app-pagination
-    [pageNumber]="pageNumber"
-    [pageSize]="pageSize"
-    [_dataSize]="dataSize"
-    (pageNumberChanged)="onPageNumberChanged($event)"
-  ></app-pagination>
 </div>
 
 <!-- Loader -->

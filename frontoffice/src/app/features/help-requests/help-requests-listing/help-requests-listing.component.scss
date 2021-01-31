@@ -2,8 +2,30 @@
   margin-top: 1.5rem;
   min-height: calc(100vh - 344px);
 
-  .tags:hover {
-    cursor: pointer;
+  .tags {
+    .text {
+      visibility: hidden;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 25px;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -60px;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .text {
+        visibility: visible;
+      }
+    }
   }
 
   .card {
@@ -32,6 +54,24 @@
         object-fit: cover;
       }
     }
+  }
+}
+
+.content {
+  white-space: pre-wrap;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.card-media {
+  float: left;
+
+  img {
+    height: 96px;
+    width: 96px;
+    object-fit: cover;
   }
 }
 

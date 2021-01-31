@@ -40,7 +40,7 @@ export class PaginationComponent implements OnInit {
   }
 
   navigateToNext() {
-    if (this.pageNumber == this.dataSize - 1) return;
+    if (this.pageNumber == this.pages.length - 1) return;
     this.navigateTo(++this.pageNumber);
   }
 }

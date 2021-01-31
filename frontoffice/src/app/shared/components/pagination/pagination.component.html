@@ -8,7 +8,7 @@
     >
     <a
       class="pagination-next"
-      [ngClass]="{ disabled: pageNumber == dataSize - 1 }"
+      [ngClass]="{ disabled: pageNumber == pages.length - 1 }"
       (click)="navigateToNext()"
       >Seguinte</a
     >

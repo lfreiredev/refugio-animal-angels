@@ -18,7 +18,7 @@ import { PaymentMethodService } from 'src/app/core/services/payment-method.servi
 export class HelpRequestsListingComponent implements OnInit, OnDestroy {
   data: HelpRequest[];
   paymentMethods: PaymentMethod[];
-  pageSize: number = 1;
+  pageSize: number = 2;
   pageNumber: number = 0;
   dataSize: number = 0;
 
@@ -52,9 +52,8 @@ export class HelpRequestsListingComponent implements OnInit, OnDestroy {
     return this.photoService.getSmall(photo.formats);
   }
 
-  navigateToDetail() {
-    // this.dogService.currAnimal = item;
-    // this.router.navigate(['pedido-ajuda/' + item.id]);
+  changeOpenedState(item: HelpRequest) {
+    item.isOpen = !item.isOpen;
   }
 
   private search() {
@@ -67,7 +66,10 @@ export class HelpRequestsListingComponent implements OnInit, OnDestroy {
   }
 
   private processResponse(res: PaginatedResponse<HelpRequest>) {
-    this.data = res.entities;
+    this.data = res.entities.map((entity) => {
+      entity.isOpen = false;
+      return entity;
+    });
     this.dataSize = res.count;
   }
 
