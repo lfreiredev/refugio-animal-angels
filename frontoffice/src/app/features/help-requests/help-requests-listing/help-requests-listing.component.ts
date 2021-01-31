@@ -9,7 +9,6 @@ import { HelpRequest } from 'src/app/core/models/help-request.model';
 import { HelpRequestService } from 'src/app/core/services/help-request.service';
 import { PaymentMethod } from 'src/app/core/models/payment-method.model';
 import { PaymentMethodService } from 'src/app/core/services/payment-method.service';
-import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-help-requests-listing',
