@@ -16,11 +16,11 @@ import { PhotoService } from '../../../core/services/photo.service';
 import { PaginatedResponse } from 'src/app/core/models/paginated-response.model';
 
 @Component({
-  selector: 'app-animal-listing',
-  templateUrl: './animal-listing.component.html',
-  styleUrls: ['./animal-listing.component.scss'],
+  selector: 'app-dog-listing',
+  templateUrl: './dog-listing.component.html',
+  styleUrls: ['./dog-listing.component.scss'],
 })
-export class AnimalListingComponent implements OnInit, OnDestroy {
+export class DogListingComponent implements OnInit, OnDestroy {
   searchForm: FormGroup = new FormGroup({});
   data: BaseAnimal[];
   pageSize: number = 1;
@@ -33,7 +33,6 @@ export class AnimalListingComponent implements OnInit, OnDestroy {
   constructor(
     private dogService: DogService,
     private photoService: PhotoService,
-    private route: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -74,11 +73,7 @@ export class AnimalListingComponent implements OnInit, OnDestroy {
         this.searchForm.controls.term.value,
         this.pageSize,
         this.pageNumber * this.pageSize
-      )
-      .pipe(delay(300))
-      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
-        this.processResponse(res)
-      );
+      ).subscribe((res: PaginatedResponse<BaseAnimal>) => this.processResponse(res));
   }
 
   private processResponse(res: PaginatedResponse<BaseAnimal>) {
@@ -93,26 +88,12 @@ export class AnimalListingComponent implements OnInit, OnDestroy {
   }
 
   private initObservables() {
-    this.route.paramMap
-      .pipe(
-        take(1),
-        switchMap((params) => {
-          return iif(
-            () => params.get('type') == 'cao',
-            this.dogService.search(
-              this.searchForm.controls.term.value,
-              this.pageSize,
-              this.pageNumber * this.pageSize
-            ),
-            of(undefined)
-          );
-        }),
-        delay(300),
-        shareReplay(1)
-      )
-      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
-        this.processResponse(res)
-      );
+    this.dogService.search(
+      this.searchForm.controls.term.value,
+      this.pageSize,
+      this.pageNumber * this.pageSize
+    ).pipe(shareReplay(1))
+    .subscribe((res: PaginatedResponse<BaseAnimal>) => this.processResponse(res));
 
     this.termChangesObs$ = this.searchForm.controls.term.valueChanges
       .pipe(
@@ -125,10 +106,6 @@ export class AnimalListingComponent implements OnInit, OnDestroy {
             this.pageNumber * this.pageSize
           );
         }),
-        delay(300)
-      )
-      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
-        this.processResponse(res)
-      );
+      ).subscribe((res: PaginatedResponse<BaseAnimal>) => this.processResponse(res));
   }
 }

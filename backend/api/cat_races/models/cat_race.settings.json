@@ -1,14 +1,13 @@
 {
   "kind": "collectionType",
-  "collectionName": "dog_race",
+  "collectionName": "cat_race",
   "info": {
-    "name": "Raças Cães",
-    "description": ""
+    "name": "Raças Gatos"
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "attributes": {
     "name": {

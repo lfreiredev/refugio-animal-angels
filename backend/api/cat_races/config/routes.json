@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/cat_races",
+      "handler": "cat_race.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cat_races/count",
+      "handler": "cat_race.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cat_races/:id",
+      "handler": "cat_race.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/cat_races",
+      "handler": "cat_race.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cat_races/:id",
+      "handler": "cat_race.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/cat_races/:id",
+      "handler": "cat_race.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

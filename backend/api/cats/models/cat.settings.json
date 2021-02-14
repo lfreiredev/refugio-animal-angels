@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cats",
+  "info": {
+    "name": "Gatos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "enumeration",
+      "enum": [
+        "masculino",
+        "feminino"
+      ],
+      "required": true
+    },
+    "age": {
+      "type": "integer",
+      "min": 0,
+      "max": 25
+    },
+    "race": {
+      "model": "cat_race"
+    },
+    "conditions": {
+      "collection": "condition"
+    },
+    "contacts": {
+      "collection": "contact"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "photo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}
