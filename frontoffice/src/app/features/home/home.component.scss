@@ -1,0 +1,23 @@
+h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.button {
+    background-color: orange;
+    color: white;
+    margin: 15px 0;
+    border: none;
+
+    &:hover {
+        background-color: rgb(238, 155, 0);
+    }
+}
+
+.box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
