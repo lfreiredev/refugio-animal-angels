@@ -8,7 +8,7 @@ import { PaginatedResponse } from '../models/paginated-response.model';
   providedIn: 'root',
 })
 export class DogService {
-  private readonly url = 'http://localhost:1337/dog/';
+  private readonly url = 'https://api.refugioanimalangels.com/dog/';
   private readonly lastPostedSize = 6;
 
   // TODO change this to state

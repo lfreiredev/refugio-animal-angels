@@ -9,7 +9,7 @@ import { HelpRequest } from '../models/help-request.model';
   providedIn: 'root',
 })
 export class HelpRequestService {
-  private readonly url = 'http://localhost:1337/help-request/';
+  private readonly url = 'https://api.refugioanimalangels.com/help-request/';
 
   constructor(private httpClient: HttpClient) {}
 

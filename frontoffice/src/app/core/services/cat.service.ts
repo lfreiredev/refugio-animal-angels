@@ -8,7 +8,7 @@ import { PaginatedResponse } from '../models/paginated-response.model';
   providedIn: 'root',
 })
 export class CatService {
-  private readonly url = 'http://localhost:1337/cat/';
+  private readonly url = 'https://api.refugioanimalangels.com/cat/';
   private readonly lastPostedSize = 6;
 
   // TODO change this to state

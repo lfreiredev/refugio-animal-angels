@@ -8,7 +8,7 @@ import { PaymentMethod } from '../models/payment-method.model';
   providedIn: 'root',
 })
 export class PaymentMethodService {
-  private readonly url = 'http://localhost:1337/payment_method/';
+  private readonly url = 'https://api.refugioanimalangels.com/payment_method/';
 
   constructor(private httpClient: HttpClient) {}
 

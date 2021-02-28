@@ -6,7 +6,7 @@ import { PhotoFormat } from '../models/photo.model';
   providedIn: 'root',
 })
 export class PhotoService {
-  private readonly url = 'http://localhost:1337';
+  private readonly url = 'https://api.refugioanimalangels.com';
   constructor() {}
 
   getThumbnail(format: PhotoFormat): string {
