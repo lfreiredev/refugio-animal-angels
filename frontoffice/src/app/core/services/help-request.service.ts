@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BaseAnimal } from '../models/base-animal.model';
 import { PaginatedResponse } from '../models/paginated-response.model';
 import { HelpRequest } from '../models/help-request.model';
 
