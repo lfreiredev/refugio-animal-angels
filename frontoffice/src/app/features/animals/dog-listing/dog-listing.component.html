@@ -36,7 +36,7 @@
     </div>
   </div>
   <!-- Pagination -->
-  <app-pagination
+  <app-pagination *ngIf="dataSize > 0"
     [pageNumber]="pageNumber"
     [pageSize]="pageSize"
     [_dataSize]="dataSize"

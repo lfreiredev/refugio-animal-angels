@@ -44,7 +44,7 @@ export class AnimalDetailComponent implements OnInit {
         break;
       }
       case 'rede_social': {
-        window.open('https://www.facebook.com/refugioanimalangels', 'blank');
+        window.open('https://www.facebook.com/refugioanimalangels', '_blank');
         break;
       }
     }

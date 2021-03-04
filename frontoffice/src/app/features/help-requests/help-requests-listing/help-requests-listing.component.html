@@ -92,7 +92,7 @@
           </div>
         </ng-container>
         <!-- Pagination -->
-        <app-pagination
+        <app-pagination *ngIf="dataSize > 0"
           [pageNumber]="pageNumber"
           [pageSize]="pageSize"
           [_dataSize]="dataSize"
@@ -105,5 +105,5 @@
 
 <!-- Loader -->
 <ng-template #loading>
-  <app-animal-card-placeholder></app-animal-card-placeholder>
+  <app-help-request-placeholder></app-help-request-placeholder>
 </ng-template>

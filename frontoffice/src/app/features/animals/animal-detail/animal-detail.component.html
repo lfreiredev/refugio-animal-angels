@@ -26,15 +26,21 @@
               <p>{{ animal.name | titlecase }}</p>
               <h3 class="is-size-5 has-text-weight-bold">Sexo</h3>
               <p>{{ animal.sex | titlecase }}</p>
-              <h3 class="is-size-5 has-text-weight-bold">Idade</h3>
-              <p>{{ animal.age }}</p>
-              <h3 class="is-size-5 has-text-weight-bold">Porte</h3>
-              <p>{{ animal.size | titlecase }}</p>
-              <h3 class="is-size-5 has-text-weight-bold">Raça</h3>
-              <p>{{ animal.race.name | titlecase }}</p>
+              <ng-container *ngIf="animal.age">
+                <h3 class="is-size-5 has-text-weight-bold">Idade</h3>
+                <p>{{ animal.age }}</p>
+              </ng-container>
+              <ng-container *ngIf="animal.size">
+                <h3 class="is-size-5 has-text-weight-bold">Porte</h3>
+                <p>{{ animal.size.replace('_', ' ') | titlecase }}</p>
+              </ng-container>
+              <ng-container *ngIf="animal.race">
+                <h3 class="is-size-5 has-text-weight-bold">Raça</h3>
+                <p>{{ animal.race.name | titlecase }}</p>
+              </ng-container>
             </div>
           </div>
-          <div class="block">
+          <div class="block" *ngIf="animal.conditions && animal.conditions.length > 0">
             <h3 class="is-size-5 has-text-weight-bold">Condições</h3>
             <div class="conditions-container mt-2">
               <span
@@ -44,7 +50,7 @@
               >
             </div>
           </div>
-          <div class="block">
+          <div class="block" *ngIf="animal.contacts && animal.contacts.length > 0">
             <h3 class="is-size-5 has-text-weight-bold">Contactos</h3>
             <div class="contacts-container mt-2">
               <span

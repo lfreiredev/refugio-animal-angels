@@ -18,7 +18,7 @@ import { PaymentMethodService } from 'src/app/core/services/payment-method.servi
 export class HelpRequestsListingComponent implements OnInit, OnDestroy {
   data: HelpRequest[];
   paymentMethods: PaymentMethod[];
-  pageSize: number = 2;
+  pageSize: number = 5;
   pageNumber: number = 0;
   dataSize: number = 0;
 
