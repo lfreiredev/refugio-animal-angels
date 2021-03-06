@@ -23,7 +23,7 @@ import { PaginatedResponse } from 'src/app/core/models/paginated-response.model'
 export class DogListingComponent implements OnInit, OnDestroy {
   searchForm: FormGroup = new FormGroup({});
   data: BaseAnimal[];
-  pageSize: number = 1;
+  pageSize: number = 8;
   pageNumber: number = 0;
   dataSize: number = 0;
 

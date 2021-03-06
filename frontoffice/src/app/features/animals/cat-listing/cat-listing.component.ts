@@ -23,7 +23,7 @@ import { CatService } from 'src/app/core/services/cat.service';
 export class CatListingComponent implements OnInit, OnDestroy {
   searchForm: FormGroup = new FormGroup({});
   data: BaseAnimal[];
-  pageSize: number = 1;
+  pageSize: number = 8;
   pageNumber: number = 0;
   dataSize: number = 0;
 
@@ -73,11 +73,7 @@ export class CatListingComponent implements OnInit, OnDestroy {
         this.searchForm.controls.term.value,
         this.pageSize,
         this.pageNumber * this.pageSize
-      )
-      .pipe(delay(300))
-      .subscribe((res: PaginatedResponse<BaseAnimal>) =>
-        this.processResponse(res)
-      );
+      ).subscribe((res: PaginatedResponse<BaseAnimal>) => this.processResponse(res));
   }
 
   private processResponse(res: PaginatedResponse<BaseAnimal>) {
