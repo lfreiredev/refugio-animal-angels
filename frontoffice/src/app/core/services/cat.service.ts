@@ -26,13 +26,13 @@ export class CatService {
   ): Observable<PaginatedResponse<BaseAnimal>> {
     this.googleAnalyticsService.eventEmitter('cat_search', 'cat', 'search', 'cat_name', `name_contains=${searchTerm}&_limit=${limit}&_start=${skip}`);
     return this.httpClient.get<PaginatedResponse<BaseAnimal>>(
-      this.url + `?name_contains=${searchTerm}&_limit=${limit}&_start=${skip}`
+      this.url + `?name_contains=${searchTerm}&_limit=${limit}&_start=${skip}&_sort=updatedAt:DESC`
     );
   }
 
   getLastPosted(): Observable<PaginatedResponse<BaseAnimal>> {
     return this.httpClient.get<PaginatedResponse<BaseAnimal>>(
-      this.url + `?_limit=${this.lastPostedSize}&_sort=updatedAt`
+      this.url + `?_limit=${this.lastPostedSize}&_sort=updatedAt:DESC`
     );
   }
 

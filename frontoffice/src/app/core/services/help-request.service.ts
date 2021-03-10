@@ -18,7 +18,7 @@ export class HelpRequestService {
   get(limit: number, skip: number): Observable<PaginatedResponse<HelpRequest>> {
     this.googleAnalyticsService.eventEmitter('help_request', 'help_request', 'help_request', 'pagination', `_limit=${limit}&_start=${skip}`);
     return this.httpClient.get<PaginatedResponse<HelpRequest>>(
-      this.url + `?_limit=${limit}&_start=${skip}`
+      this.url + `?_limit=${limit}&_start=${skip}&_sort=updatedAt:DESC`
     );
   }
 }
